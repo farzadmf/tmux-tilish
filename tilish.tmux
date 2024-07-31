@@ -73,7 +73,8 @@ legacy="$(tmux -V | grep -E 'tmux (1\.|2\.[0-6])')"
 for opt in \
 	default dmenu easymode prefix shiftnum \
 	navigate navigator \
-	smart_splits smart_splits_dirs \
+	smart_splits smart_splits_dirs smart_splits_dirs_large \
+  smart_splits_large_dx smart_splits_large_dy \
 	layout_keys \
 	refresh rename \
 	refresh_hooks \
@@ -330,15 +331,32 @@ if [ "${smart_splits:-}" = "on" ]; then
 		smart_splits_dirs='fvtg'
 	fi
 
+	if [ -z "$smart_splits_dirs_large" ]; then
+		smart_splits_dirs_large='sxde'
+	fi
+
 	left=$(char_at $smart_splits_dirs 1)
 	down=$(char_at $smart_splits_dirs 2)
 	up=$(char_at $smart_splits_dirs 3)
 	right=$(char_at $smart_splits_dirs 4)
 
-	tmux $bind "${mod}${left}" if-shell "$is_vim" "send M-${left}" 'resize-pane -L'
-	tmux $bind "${mod}${down}" if-shell "$is_vim" "send M-${down}" 'resize-pane -D'
-	tmux $bind "${mod}${up}" if-shell "$is_vim" "send M-${up}" 'resize-pane -U'
+	tmux $bind "${mod}${left}"  if-shell "$is_vim" "send M-${left}"  'resize-pane -L'
+	tmux $bind "${mod}${down}"  if-shell "$is_vim" "send M-${down}"  'resize-pane -D'
+	tmux $bind "${mod}${up}"    if-shell "$is_vim" "send M-${up}"    'resize-pane -U'
 	tmux $bind "${mod}${right}" if-shell "$is_vim" "send M-${right}" 'resize-pane -R'
+
+	left_large=$(char_at $smart_splits_dirs_large 1)
+	down_large=$(char_at $smart_splits_dirs_large 2)
+	up_large=$(char_at $smart_splits_dirs_large 3)
+	right_large=$(char_at $smart_splits_dirs_large 4)
+
+  dx=${smart_splits_large_dx:-10}
+  dy=${smart_splits_large_dy:-6}
+
+	tmux $bind "${mod}${left_large}"  if-shell "$is_vim" "send M-${left}"  "resize-pane -L $dx"
+	tmux $bind "${mod}${down_large}"  if-shell "$is_vim" "send M-${down}"  "resize-pane -D $dy"
+	tmux $bind "${mod}${up_large}"    if-shell "$is_vim" "send M-${up}"    "resize-pane -U $dy"
+	tmux $bind "${mod}${right_large}" if-shell "$is_vim" "send M-${right}" "resize-pane -R $dx"
 fi
 # }}}
 

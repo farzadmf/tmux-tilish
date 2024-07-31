@@ -427,6 +427,17 @@ And you can customize the keys (the order is left/down/up/right); for example, t
 
     set -g @tilish-smart_splits_dirs 'fvtg'
 
+There's also the variable `@tilish-smart_splits_dirs_large`, which resizes the panes in larger
+deltas. Different delta values for `x` and `y` directions can be specified using the
+`@tilish-smart_splits_large_dx` and `@tilish-smart_splits_large_dy`.
+
+Default values for the options mentioned above (there's no need for these lines in your config;
+there are here for reference):
+
+    set -g @tilish-smart_splits_dirs_large 'sxde'
+    set -g @tilish-smart_splits_large_dx 10
+    set -g @tilish-smart_splits_large_dx 6
+
 [3]: https://github.com/christoomey/vim-tmux-navigator
 [4]: https://github.com/mrjones2014/smart-splits.nvim
 [10]: https://github.com/sunaku/tmux-navigate
