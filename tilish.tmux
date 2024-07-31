@@ -328,11 +328,11 @@ fi
 
 if [ "${smart_splits:-}" = "on" ]; then
 	if [ -z "$smart_splits_dirs" ]; then
-		smart_splits_dirs='fvtg'
+		smart_splits_dirs='fvtg' # left/down/up/right
 	fi
 
 	if [ -z "$smart_splits_dirs_large" ]; then
-		smart_splits_dirs_large='sxde'
+		smart_splits_dirs_large='sxed' # left/down/up/right
 	fi
 
 	left=$(char_at $smart_splits_dirs 1)
