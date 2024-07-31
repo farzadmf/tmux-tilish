@@ -434,7 +434,7 @@ deltas. Different delta values for `x` and `y` directions can be specified using
 Default values for the options mentioned above (there's no need for these lines in your config;
 there are here for reference):
 
-    set -g @tilish-smart_splits_dirs_large 'sxde'
+    set -g @tilish-smart_splits_dirs_large 'sxed'
     set -g @tilish-smart_splits_large_dx 10
     set -g @tilish-smart_splits_large_dx 6
 
