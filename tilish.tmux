@@ -340,10 +340,10 @@ if [ "${smart_splits:-}" = "on" ]; then
 	up=$(char_at $smart_splits_dirs 3)
 	right=$(char_at $smart_splits_dirs 4)
 
-	tmux $bind "${mod}${left}"  if-shell "$is_vim" "send M-${left}"  'resize-pane -L'
-	tmux $bind "${mod}${down}"  if-shell "$is_vim" "send M-${down}"  'resize-pane -D'
-	tmux $bind "${mod}${up}"    if-shell "$is_vim" "send M-${up}"    'resize-pane -U'
-	tmux $bind "${mod}${right}" if-shell "$is_vim" "send M-${right}" 'resize-pane -R'
+	tmux $bind "${mod}${left}"  if-shell "$is_vim" "send ${mod}${left}"  'resize-pane -L'
+	tmux $bind "${mod}${down}"  if-shell "$is_vim" "send ${mod}${down}"  'resize-pane -D'
+	tmux $bind "${mod}${up}"    if-shell "$is_vim" "send ${mod}${up}"    'resize-pane -U'
+	tmux $bind "${mod}${right}" if-shell "$is_vim" "send ${mod}${right}" 'resize-pane -R'
 
 	left_large=$(char_at $smart_splits_dirs_large 1)
 	down_large=$(char_at $smart_splits_dirs_large 2)
@@ -353,10 +353,10 @@ if [ "${smart_splits:-}" = "on" ]; then
   dx=${smart_splits_large_dx:-10}
   dy=${smart_splits_large_dy:-6}
 
-	tmux $bind "${mod}${left_large}"  if-shell "$is_vim" "send M-${left}"  "resize-pane -L $dx"
-	tmux $bind "${mod}${down_large}"  if-shell "$is_vim" "send M-${down}"  "resize-pane -D $dy"
-	tmux $bind "${mod}${up_large}"    if-shell "$is_vim" "send M-${up}"    "resize-pane -U $dy"
-	tmux $bind "${mod}${right_large}" if-shell "$is_vim" "send M-${right}" "resize-pane -R $dx"
+	tmux $bind "${mod}${left_large}"  if-shell "$is_vim" "send ${mod}${left}"  "resize-pane -L $dx"
+	tmux $bind "${mod}${down_large}"  if-shell "$is_vim" "send ${mod}${down}"  "resize-pane -D $dy"
+	tmux $bind "${mod}${up_large}"    if-shell "$is_vim" "send ${mod}${up}"    "resize-pane -U $dy"
+	tmux $bind "${mod}${right_large}" if-shell "$is_vim" "send ${mod}${right}" "resize-pane -R $dx"
 fi
 # }}}
 
