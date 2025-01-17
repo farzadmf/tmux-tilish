@@ -304,11 +304,11 @@ fi
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
 
 if [ "${navigate:-}" = "on" ]; then
-	# If `@tilish-navigate` is nonzero, integrate Alt + hjkl with `tmux-navigate`.
-	tmux set -g '@navigate-left' '-n M-h'
-	tmux set -g '@navigate-down' '-n M-j'
-	tmux set -g '@navigate-up' '-n M-k'
-	tmux set -g '@navigate-right' '-n M-l'
+	# If `@tilish-navigate` is nonzero, integrate Mod + hjkl with `tmux-navigate`.
+	tmux set -g '@navigate-left'  "-n ${mod}${h}"
+	tmux set -g '@navigate-down'  "-n ${mod}${j}"
+	tmux set -g '@navigate-up'    "-n ${mod}${k}"
+	tmux set -g '@navigate-right' "-n ${mod}${l}"
 elif [ "${navigator:-}" = "on" ]; then
 	# If `@tilish-navigator` is nonzero, integrate Mod + hjkl with `vim-tmux-navigator`.
 	# This assumes that your Vim/Neovim is setup to use Alt + hjkl bindings as well.
