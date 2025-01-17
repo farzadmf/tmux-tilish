@@ -319,10 +319,10 @@ elif [ "${navigator:-}" = "on" ]; then
 	tmux $bind "${mod}${l}" if-shell "$is_vim" "send ${mod}${l}" 'select-pane -R'
 
 	if [ -z "$prefix" ]; then
-		tmux bind -T copy-mode-vi "M-$h" select-pane -L
-		tmux bind -T copy-mode-vi "M-$j" select-pane -D
-		tmux bind -T copy-mode-vi "M-$k" select-pane -U
-		tmux bind -T copy-mode-vi "M-$l" select-pane -R
+		tmux bind -T copy-mode-vi "${mod}${h}" select-pane -L
+		tmux bind -T copy-mode-vi "${mod}${j}" select-pane -D
+		tmux bind -T copy-mode-vi "${mod}${k}" select-pane -U
+		tmux bind -T copy-mode-vi "${mod}${l}" select-pane -R
 	fi
 fi
 
