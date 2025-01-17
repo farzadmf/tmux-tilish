@@ -310,13 +310,13 @@ if [ "${navigate:-}" = "on" ]; then
 	tmux set -g '@navigate-up' '-n M-k'
 	tmux set -g '@navigate-right' '-n M-l'
 elif [ "${navigator:-}" = "on" ]; then
-	# If `@tilish-navigator` is nonzero, integrate Alt + hjkl with `vim-tmux-navigator`.
-	# This assumes that your Vim/Neovim is setup to use Alt + hjkl bindings as well.
+	# If `@tilish-navigator` is nonzero, integrate Mod + hjkl with `vim-tmux-navigator`.
+	# This assumes that your Vim/Neovim is setup to use Mod + hjkl bindings as well.
 
-	tmux $bind "${mod}${h}" if-shell "$is_vim" 'send M-h' 'select-pane -L'
-	tmux $bind "${mod}${j}" if-shell "$is_vim" 'send M-j' 'select-pane -D'
-	tmux $bind "${mod}${k}" if-shell "$is_vim" 'send M-k' 'select-pane -U'
-	tmux $bind "${mod}${l}" if-shell "$is_vim" 'send M-l' 'select-pane -R'
+	tmux $bind "${mod}${h}" if-shell "$is_vim" "send ${mod}-h" 'select-pane -L'
+	tmux $bind "${mod}${j}" if-shell "$is_vim" "send ${mod}-j" 'select-pane -D'
+	tmux $bind "${mod}${k}" if-shell "$is_vim" "send ${mod}-k" 'select-pane -U'
+	tmux $bind "${mod}${l}" if-shell "$is_vim" "send ${mod}-l" 'select-pane -R'
 
 	if [ -z "$prefix" ]; then
 		tmux bind -T copy-mode-vi "M-$h" select-pane -L
