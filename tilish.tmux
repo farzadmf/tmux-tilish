@@ -16,9 +16,31 @@
 
 # Define core functionality {{{
 bind_switch() {
-	# Bind keys to switch between workspaces.
+	# Bind keys to switch between workspaces with toggle functionality.
 	tmux $bind "$1" \
-		if-shell "tmux select-window -t :$2" "" "new-window -t :$2"
+		run-shell "
+			current=\$(tmux display-message -p '#I')
+			target=$2
+			prev=\$(tmux show-environment -g @_tilish_toggle_prev 2>/dev/null | cut -d= -f2 || echo '')
+			curr_stored=\$(tmux show-environment -g @_tilish_toggle_curr 2>/dev/null | cut -d= -f2 || echo '')
+			
+			if [ \"\$current\" = \"\$target\" ] && [ -n \"\$prev\" ]; then
+				# Already on target window, toggle to previous
+				tmux select-window -t :\$prev 2>/dev/null || true
+				# Swap the toggle state since we just toggled
+				tmux set-environment -g @_tilish_toggle_prev \"\$curr_stored\"
+				tmux set-environment -g @_tilish_toggle_curr \"\$prev\"
+			elif tmux select-window -t :\$target 2>/dev/null; then
+				# Switch succeeded, update toggle state
+				tmux set-environment -g @_tilish_toggle_prev \"\$current\"
+				tmux set-environment -g @_tilish_toggle_curr \"\$target\"
+			else
+				# Window doesn't exist, create it
+				tmux new-window -t :\$target
+				tmux set-environment -g @_tilish_toggle_prev \"\$current\"
+				tmux set-environment -g @_tilish_toggle_curr \"\$target\"
+			fi
+		"
 }
 
 bind_move() {
