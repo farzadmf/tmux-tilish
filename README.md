@@ -18,6 +18,9 @@
   - [Integration with vim](#integration-with-vim)
     - [Navigate](#navigate)
     - [Navigator](#navigator)
+    - [Smart-Splits](#smart-splits)
+      - [Navigation](#navigation)
+      - [Resizing](#resizing)
 - [Related projects](#related-projects)
 
 </details>
@@ -414,16 +417,30 @@ A minimal working example of a `~/.tmux.conf` with `tpm` would then be:
 
 ### Smart-Splits
 
-Although this plugin also provides navigation, as of now, we only support the resizing of splits.
-The default directions used as up/down/left/right are `tvfg`. They might seem random, but on a
-"normal" keyboard, you can see how they can represent the directions 😉.
+This plugin supports both navigation and resizing integration with `smart-splits.nvim`.
+You need to setup the plugin in neovim (see their website), and then tell `tilish` to enable
+the integration.
 
-You to setup the plugin in neovim (see their Website), and then tell `tilish` to enable
-the integration:
+#### Navigation
+
+To use `smart-splits` for pane navigation (instead of `tmux-navigate` or `vim-tmux-navigator`):
+
+    set -g @tilish-smart_splits_navigate 'on'
+
+By default, navigation wraps around pane edges. To disable wrapping:
+
+    set -g @tilish-smart_splits_navigate_no_wrap 'on'
+
+#### Resizing
+
+To enable resizing integration:
 
     set -g @tilish-smart_splits 'on'
 
-And you can customize the keys (the order is left/down/up/right); for example, the default is:
+The default directions used as up/down/left/right are `tvfg`. They might seem random, but on a
+"normal" keyboard, you can see how they can represent the directions 😉.
+
+You can customize the keys (the order is left/down/up/right); for example, the default is:
 
     set -g @tilish-smart_splits_dirs 'fvtg'
 
@@ -436,7 +453,7 @@ there are here for reference):
 
     set -g @tilish-smart_splits_dirs_large 'sxed'
     set -g @tilish-smart_splits_large_dx 10
-    set -g @tilish-smart_splits_large_dx 6
+    set -g @tilish-smart_splits_large_dy 6
 
 [3]: https://github.com/christoomey/vim-tmux-navigator
 [4]: https://github.com/mrjones2014/smart-splits.nvim
